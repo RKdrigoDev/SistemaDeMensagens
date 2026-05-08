@@ -18,6 +18,7 @@ public class AtendimentoMensagem {
         filaSugestao.init();
 
         do{
+            System.out.println();
             System.out.println("""
                     Bem Vindo a SecretáriaVirtual!!!!!
                 Digite uma das opções embaixo -->
@@ -48,6 +49,7 @@ public class AtendimentoMensagem {
         System.out.println("qual o motivo do contato? 1-reclamação/ 2-sugestão");
         motivo=sc.nextInt();
         System.out.println("digite a mensagem aqui --> ");
+        sc.nextLine();
         texto=sc.nextLine();
         Mensagem mensagem=new Mensagem(nome,emailTel,motivo,texto);
         if (mensagem.getMotivo()==1){
