@@ -30,10 +30,22 @@ public class AtendimentoMensagem {
             opcao=sc.nextInt();
 
             switch (opcao){
-                case 0 -> System.out.println("Processo encerrado!");
-                case 1 -> receberMensagem();
-                case 2 -> atenderMensagem();
-                case 3 -> receberEncaminhar();
+                case 0: if(filaResolucao.isEmpty()||filaReclamacao.isEmpty()||filaSugestao.isEmpty()){
+                    System.out.println("Você ainda tem casos pendentes!");
+                    opcao=-1;
+                }
+                else {
+                    System.out.println("o atendimento foi encerrado");
+                }
+                break;
+                case 1: receberMensagem();
+                break;
+                case 2: atenderMensagem();
+                break;
+                case 3: receberEncaminhar();
+                break;
+                default:
+                    System.out.println("opção íválida!!!");
             }
         }while(opcao!=0);
     }
@@ -43,11 +55,22 @@ public class AtendimentoMensagem {
         int motivo;
         String texto;
         System.out.println("Qual é o seu nome?");
-        nome=sc.next();
+        sc.nextLine();
+        nome=sc.nextLine();
         System.out.println("Digite o seu email ou o número de telefone?");
         emailTel=sc.next();
-        System.out.println("qual o motivo do contato? 1-reclamação/ 2-sugestão");
-        motivo=sc.nextInt();
+        do{
+            System.out.println("Qual o motivo do contato?");
+            System.out.println("[1] Reclamação");
+            System.out.println("[2] Sugestão");
+
+            motivo = sc.nextInt();
+
+            if(motivo != 1 && motivo != 2){
+                System.out.println("Opção inválida! Digite apenas 1 ou 2.");
+            }
+
+        }while(motivo != 1 && motivo != 2);
         System.out.println("digite a mensagem aqui --> ");
         sc.nextLine();
         texto=sc.nextLine();
@@ -61,19 +84,70 @@ public class AtendimentoMensagem {
 
     }
     public static void atenderMensagem(){
+        String resposta;
         int opcao;
+        String decisao;
         Mensagem aux;
-        System.out.println("Qual mensagem que lidar primeiro?");
-        opcao=sc.nextInt();
+        do{
+            System.out.println("Qual mensagem resolver primeiro?");
+            System.out.println("[1] Reclamação");
+            System.out.println("[2] Sugestão");
+
+            opcao = sc.nextInt();
+
+            if(opcao!= 1 && opcao != 2){
+                System.out.println("Opção inválida! Digite apenas 1 ou 2.");
+            }
+
+        }while(opcao != 1 && opcao != 2);
+
         if (opcao==2){
-            filaSugestao.dequeue();
-            System.out.println("Enviada resposta para cliente: Sua solicitação já foi resolvida. Obrigado!!!");
+            if (filaSugestao.isEmpty()){
+                System.out.println("não há nenhuma mensagem deste tipo");
+
+            }
+            else {
+                aux=filaSugestao.dequeue();
+                System.out.println(aux.getTexto());
+                System.out.println();
+                System.out.println("como proceder? A => resolver/ B => encaminhar para outro setor");
+                decisao=sc.next();
+                if (decisao.equalsIgnoreCase("a")){
+                    System.out.println("digite a sua resposta aqui -->");
+                    sc.nextLine();
+                    resposta=sc.nextLine();
+                    System.out.println("Enviada resposta para cliente: Sua solicitação já foi resolvida. Obrigado!!!");
+                }
+                else {
+                    filaResolucao.enqueue(aux);
+                    System.out.println();
+                    System.out.println("Enviada resposta para cliente: Sua solicitação estásendo analisado pelo setor responsável");
+                }
+            }
         }
         else {
-           aux=filaReclamacao.dequeue();
-           filaResolucao.enqueue(aux);
-           System.out.println();
-            System.out.println("Enviada resposta para cliente: Sua solicitação estásendo analisado pelo setor responsável, pode levar um tempo. Obrigado pela compreenção!!!! ");
+            if (filaReclamacao.isEmpty()) {
+                System.out.println("não há nenhuma mensagem deste tipo");
+
+            }
+            else {
+                aux=filaReclamacao.dequeue();
+                System.out.println(aux.getTexto());
+                System.out.println();
+                System.out.println("como proceder? A => resolver/ B => encaminhar para outro setor");
+                decisao=sc.next();
+                if (decisao.equalsIgnoreCase("a")){
+                    System.out.println("digite a sua resposta aqui -->");
+                    sc.nextLine();
+                    resposta=sc.nextLine();
+                    System.out.println("Enviada resposta para cliente: Sua solicitação já foi resolvida. Obrigado!!!");
+                }
+                else {
+                    filaResolucao.enqueue(aux);
+                    System.out.println();
+                    System.out.println("Enviada resposta para cliente: Sua solicitação estásendo analisado pelo setor responsável, pode levar algum tempo até ser respondido, obrigado!");
+                }
+            }
         }
 
     }
