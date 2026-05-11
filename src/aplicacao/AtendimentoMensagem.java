@@ -1,3 +1,6 @@
+
+
+
 package aplicacao;
 
 import entidades.Mensagem;
@@ -30,7 +33,7 @@ public class AtendimentoMensagem {
             opcao=sc.nextInt();
 
             switch (opcao){
-                case 0: if(filaResolucao.isEmpty()||filaReclamacao.isEmpty()||filaSugestao.isEmpty()){
+                case 0: if(!filaResolucao.isEmpty()||!filaReclamacao.isEmpty()||!filaSugestao.isEmpty()){
                     System.out.println("Você ainda tem casos pendentes!");
                     opcao=-1;
                 }
@@ -152,6 +155,9 @@ public class AtendimentoMensagem {
 
     }
     public static void receberEncaminhar(){
+        if (filaSugestao.isEmpty()){
+            System.out.println("não há mensagens encaminhadas!!!");
+        }
         filaResolucao.dequeue();
         System.out.println("Enviada resposta para cliente: sua solicitação já foi resolvida pelo setor responsável. Obrigado!!!");
     }
