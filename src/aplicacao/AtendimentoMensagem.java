@@ -113,8 +113,14 @@ public class AtendimentoMensagem {
                 aux=filaSugestao.dequeue();
                 System.out.println(aux.getTexto());
                 System.out.println();
-                System.out.println("como proceder? A => resolver/ B => encaminhar para outro setor");
-                decisao=sc.next();
+                do {
+                    System.out.println("como proceder? A => resolver/ B => encaminhar para outro setor");
+                    decisao = sc.next();
+                    if (!decisao.equalsIgnoreCase("a")&&decisao.equalsIgnoreCase("b")){
+                        System.out.println("digite apenas 'A' ou 'B'");
+                    }
+                }
+                while (!decisao.equalsIgnoreCase("a")&&decisao.equalsIgnoreCase("b"));
                 if (decisao.equalsIgnoreCase("a")){
                     System.out.println("digite a sua resposta aqui -->");
                     sc.nextLine();
@@ -137,8 +143,14 @@ public class AtendimentoMensagem {
                 aux=filaReclamacao.dequeue();
                 System.out.println(aux.getTexto());
                 System.out.println();
-                System.out.println("como proceder? A => resolver/ B => encaminhar para outro setor");
-                decisao=sc.next();
+                do {
+                    System.out.println("como proceder? A => resolver/ B => encaminhar para outro setor");
+                    decisao = sc.next();
+                    if (!decisao.equalsIgnoreCase("a")&&decisao.equalsIgnoreCase("b")){
+                        System.out.println("digite apenas 'A' ou 'B'");
+                    }
+                }
+                while (!decisao.equalsIgnoreCase("a")&&decisao.equalsIgnoreCase("b"));
                 if (decisao.equalsIgnoreCase("a")){
                     System.out.println("digite a sua resposta aqui -->");
                     sc.nextLine();
