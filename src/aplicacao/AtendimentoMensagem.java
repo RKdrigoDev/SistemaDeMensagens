@@ -48,7 +48,7 @@ public class AtendimentoMensagem {
                 case 3: receberEncaminhar();
                 break;
                 default:
-                    System.out.println("opção íválida!!!");
+                    System.out.println("opção ínválida!!!");
             }
         }while(opcao!=0);
     }
@@ -120,7 +120,7 @@ public class AtendimentoMensagem {
                         System.out.println("digite apenas 'A' ou 'B'");
                     }
                 }
-                while (!decisao.equalsIgnoreCase("a")&&decisao.equalsIgnoreCase("b"));
+                while (!decisao.equalsIgnoreCase("a")&&!decisao.equalsIgnoreCase("b"));
                 if (decisao.equalsIgnoreCase("a")){
                     System.out.println("digite a sua resposta aqui -->");
                     sc.nextLine();
@@ -130,7 +130,7 @@ public class AtendimentoMensagem {
                 else {
                     filaResolucao.enqueue(aux);
                     System.out.println();
-                    System.out.println("Enviada resposta para cliente: Sua solicitação estásendo analisado pelo setor responsável");
+                    System.out.println("Enviada resposta para cliente: Sua solicitação está sendo analisada pelo setor responsável");
                 }
             }
         }
@@ -167,10 +167,13 @@ public class AtendimentoMensagem {
 
     }
     public static void receberEncaminhar() {
-        if (filaSugestao.isEmpty()) {
+        Mensagem aux;
+        if (filaResolucao.isEmpty()) {
             System.out.println("não há mensagens encaminhadas!!!");
         } else {
-            filaResolucao.dequeue();
+
+            aux=filaResolucao.dequeue();
+            System.out.println(aux.getTexto());
             System.out.println("Enviada resposta para cliente: sua solicitação já foi resolvida pelo setor responsável. Obrigado!!!");
 
         }
