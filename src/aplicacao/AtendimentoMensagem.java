@@ -116,7 +116,7 @@ public class AtendimentoMensagem {
                 do {
                     System.out.println("como proceder? A => resolver/ B => encaminhar para outro setor");
                     decisao = sc.next();
-                    if (!decisao.equalsIgnoreCase("a")&&decisao.equalsIgnoreCase("b")){
+                    if (!decisao.equalsIgnoreCase("a")&&!decisao.equalsIgnoreCase("b")){
                         System.out.println("digite apenas 'A' ou 'B'");
                     }
                 }
@@ -125,6 +125,7 @@ public class AtendimentoMensagem {
                     System.out.println("digite a sua resposta aqui -->");
                     sc.nextLine();
                     resposta=sc.nextLine();
+                    System.out.println("Respostas enviadas: "+resposta);
                     System.out.println("Enviada resposta para cliente: Sua solicitação já foi resolvida. Obrigado!!!");
                 }
                 else {
@@ -146,15 +147,16 @@ public class AtendimentoMensagem {
                 do {
                     System.out.println("como proceder? A => resolver/ B => encaminhar para outro setor");
                     decisao = sc.next();
-                    if (!decisao.equalsIgnoreCase("a")&&decisao.equalsIgnoreCase("b")){
+                    if (!decisao.equalsIgnoreCase("a")&&!decisao.equalsIgnoreCase("b")){
                         System.out.println("digite apenas 'A' ou 'B'");
                     }
                 }
-                while (!decisao.equalsIgnoreCase("a")&&decisao.equalsIgnoreCase("b"));
+                while (!decisao.equalsIgnoreCase("a")&&!decisao.equalsIgnoreCase("b"));
                 if (decisao.equalsIgnoreCase("a")){
                     System.out.println("digite a sua resposta aqui -->");
                     sc.nextLine();
                     resposta=sc.nextLine();
+                    System.out.println("Respostas enviadas: "+resposta);
                     System.out.println("Enviada resposta para cliente: Sua solicitação já foi resolvida. Obrigado!!!");
                 }
                 else {
