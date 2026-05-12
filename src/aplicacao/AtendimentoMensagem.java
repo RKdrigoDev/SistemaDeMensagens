@@ -86,11 +86,20 @@ public class AtendimentoMensagem {
         sc.nextLine();
         texto=sc.nextLine();
         Mensagem mensagem=new Mensagem(nome,emailTel,motivo,texto);
-        if (mensagem.getMotivo()==1){
-           filaReclamacao.enqueue(mensagem);
+        if (mensagem.getMotivo()==1) {
+            if (filaReclamacao.isFull()) {
+                System.out.println("A fila tá cheia, resolva as questôes pendentes primeiro");
+            } else {
+                filaReclamacao.enqueue(mensagem);
+            }
         }
         else {
-            filaSugestao.enqueue(mensagem);
+            if (filaSugestao.isFull()){
+                System.out.println("A fila tá cheia, resolva as questôes pendentes primeiro");
+            }
+            else {
+                filaSugestao.enqueue(mensagem);
+            }
         }
 
     }
@@ -137,10 +146,15 @@ public class AtendimentoMensagem {
                     System.out.println("Enviada resposta para cliente: Sua solicitação já foi resolvida. Obrigado!!!");
                 }
                 else {
-                    filaResolucao.enqueue(aux);
-                    System.out.println();
-                    System.out.println("Enviada resposta para cliente: Sua solicitação está sendo analisada pelo setor responsável");
-                }
+                    if (filaResolucao.isFull()){
+                        System.out.println("A fila de resolução está cheia!!!");
+                    }
+                    else {
+                        filaResolucao.enqueue(aux);
+                        System.out.println();
+                        System.out.println("Enviada resposta para cliente: Sua solicitação está sendo analisada pelo setor responsável");
+                    }
+                    }
             }
         }
         else {
@@ -168,9 +182,13 @@ public class AtendimentoMensagem {
                     System.out.println("Enviada resposta para cliente: Sua solicitação já foi resolvida. Obrigado!!!");
                 }
                 else {
-                    filaResolucao.enqueue(aux);
-                    System.out.println();
-                    System.out.println("Enviada resposta para cliente: Sua solicitação estásendo analisado pelo setor responsável, pode levar algum tempo até ser respondido, obrigado!");
+                    if (filaResolucao.isFull()) {
+                        System.out.println("A fila de resolução está cheia!!!");
+                    } else {
+                        filaResolucao.enqueue(aux);
+                        System.out.println();
+                        System.out.println("Enviada resposta para cliente: Sua solicitação está sendo analisada pelo setor responsável");
+                    }
                 }
             }
         }
